@@ -26,13 +26,13 @@ COLUMNS = [
 
 def convert_raw_to_csv():
     if not os.path.exists(RAW_DATA_PATH):
-        raise FileNotFoundError("❌ RAW german.data file not found.")
+        raise FileNotFoundError(" RAW german.data file not found.")
     print("🔄 Converting to CSV...")
     os.makedirs(os.path.dirname(DATA_CSV_PATH), exist_ok=True)
     df = pd.read_csv(RAW_DATA_PATH, sep=' ', header=None)
     df.columns = COLUMNS
     df.to_csv(DATA_CSV_PATH, index=False)
-    print(f"✅ Saved to {DATA_CSV_PATH}")
+    print(f"Saved to {DATA_CSV_PATH}")
 
 def load_data():
     if not os.path.exists(DATA_CSV_PATH):
@@ -90,9 +90,9 @@ def train_model(X, y):
     y_pred = best_model.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
 
-    print(f"\n✅ Best Params: {grid_search.best_params_}")
-    print(f"🎯 Accuracy: {acc * 100:.2f}%\n")
-    print("📊 Classification Report:\n", classification_report(y_test, y_pred, target_names=['Not Creditworthy', 'Creditworthy']))
+    print(f"\nBest Params: {grid_search.best_params_}")
+    print(f"Accuracy: {acc * 100:.2f}%\n")
+    print("Classification Report:\n", classification_report(y_test, y_pred, target_names=['Not Creditworthy', 'Creditworthy']))
 
     return best_model
 
@@ -103,7 +103,7 @@ def save_model(model, preprocessor, column_order):
         "preprocessor": preprocessor,
         "columns": column_order
     }, MODEL_PATH)
-    print(f"\n💾 Model saved to: {MODEL_PATH}")
+    print(f"\n Model saved to: {MODEL_PATH}")
 
 if __name__ == "__main__":
     df = load_data()
