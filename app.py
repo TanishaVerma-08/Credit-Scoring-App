@@ -5,33 +5,27 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# -------------------------
-# Load trained model
-# -------------------------
+#Loading model
 MODEL_PATH = os.path.join("models", "random_forest_model.pkl")
 model_data = joblib.load(MODEL_PATH)
 model = model_data["model"]
 preprocessor = model_data["preprocessor"]
 column_order = model_data["columns"]
 
-# Load training data
+#Loading training data
 DATA_CSV_PATH = os.path.join("data", "german_credit_data.csv")
 df = pd.read_csv(DATA_CSV_PATH)
 df['Creditability'] = df['Creditability'].map({1: 'Good', 0: 'Bad'})
 
-# -------------------------
-# Streamlit Page Config
-# -------------------------
+#Streamlit page
 st.set_page_config(page_title="Credit Scoring App", layout="centered")
 
 st.markdown("<h1 style='text-align: center; color: teal;'>💳 Credit Scoring Dashboard</h1>", unsafe_allow_html=True)
 
-# Navigation Sidebar
+#Nav Sidebar
 page = st.sidebar.radio("🔍 Choose Page", ["🔮 Predict Creditworthiness", "📈 EDA Analysis", "📊 View Insights"])
 
-# -------------------------
-# PREDICTION PAGE
-# -------------------------
+#Prediction page
 if page == "🔮 Predict Creditworthiness":
     st.subheader("🧾 Enter Client Financial Information")
     col1, col2 = st.columns(2)
@@ -124,9 +118,7 @@ if page == "🔮 Predict Creditworthiness":
         except Exception as e:
             st.error(f"Prediction failed: {e}")
 
-# -------------------------------
-# EDA ANALYSIS PAGE
-# -------------------------------
+#EDA Analysis
 elif page == "📈 EDA Analysis":
     st.subheader("📊 Exploratory Data Analysis")
 
@@ -147,9 +139,7 @@ elif page == "📈 EDA Analysis":
 
     st.info("These insights can help identify trends in credit approval based on age and loan amount.")
 
-# -------------------------------
-# INSIGHTS PAGE
-# -------------------------------
+#Insights page
 elif page == "📊 View Insights":
     st.subheader("📈 Training Data Insights")
 
