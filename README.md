@@ -1,6 +1,6 @@
 # 💳 Credit Scoring Prediction App
 
-A simple machine learning web app that predicts whether a person is **creditworthy** or **not creditworthy** based on their financial details. The model is trained using the **Random Forest** algorithm and the app is built using **Python** and **Streamlit**.
+A simple machine learning project that predicts whether an individual is **creditworthy** or **not creditworthy** using a **Random Forest Classifier** based on financial attributes. The app features a clean **Streamlit interface**, integrated **EDA (Exploratory Data Analysis)** visualizations, and a modular project structure.
 
 ---
 
