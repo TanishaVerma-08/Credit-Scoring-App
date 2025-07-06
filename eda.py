@@ -19,7 +19,7 @@ COLUMNS = [
     'Number of dependents', 'Telephone', 'Foreign worker', 'Creditability'
 ]
 
-# Step 1: Convert to CSV if not already
+# Convert to CSV if not already
 if not os.path.exists(DATA_CSV_PATH):
     os.makedirs("data", exist_ok=True)
     df = pd.read_csv(RAW_DATA_PATH, sep=' ', header=None)
@@ -28,35 +28,35 @@ if not os.path.exists(DATA_CSV_PATH):
 else:
     df = pd.read_csv(DATA_CSV_PATH)
 
-# Step 2: Convert target for plots (1 = Good, 2 = Bad)
+# Convert target for plots (1 = Good, 2 = Bad)
 df['Creditability'] = df['Creditability'].map({1: "Good", 2: "Bad"})
 
-# Step 3: Create output folder
+# Create output folder
 output_dir = "data"
 os.makedirs(output_dir, exist_ok=True)
 
-#Plot 1: Creditability distribution
+#Creditability distribution
 plt.figure(figsize=(6, 4))
 sns.countplot(data=df, x='Creditability', palette="viridis")
 plt.title("Creditability Distribution")
 plt.savefig(os.path.join(output_dir, "creditability_distribution.png"))
 plt.close()
 
-#Plot 2: Credit amount
+#Credit amount
 plt.figure(figsize=(6, 4))
 sns.histplot(df['Credit amount'], bins=30, kde=True, color='skyblue')
 plt.title("Credit Amount Distribution")
 plt.savefig(os.path.join(output_dir, "credit amount_distribution.png"))
 plt.close()
 
-#Plot 3: Age
+# Age
 plt.figure(figsize=(6, 4))
 sns.histplot(df['Age'], bins=30, kde=True, color='orange')
 plt.title("Age Distribution")
 plt.savefig(os.path.join(output_dir, "age_distribution.png"))
 plt.close()
 
-# 📊 Plot 4: Correlation Heatmap
+#Correlation Heatmap
 plt.figure(figsize=(10, 8))
 corr = df.select_dtypes(include=['int64', 'float64']).corr()
 sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f")
@@ -64,7 +64,7 @@ plt.title("Feature Correlation Heatmap")
 plt.savefig(os.path.join(output_dir, "correlation_heatmap.png"))
 plt.close()
 
-# 📊 Plot 5: Age vs Creditability
+# Age vs Creditability
 plt.figure(figsize=(6, 4))
 sns.boxplot(data=df, x='Creditability', y='Age', palette='Set2')
 plt.title("Age vs Creditability")
